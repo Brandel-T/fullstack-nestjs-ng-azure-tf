@@ -22,7 +22,7 @@ jobs:
           node-version: '22'
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
   ci_frontend_test:
     needs: setup_environment
