@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./backend
+      target: production
+      dockerfile: Dockerfile
+    container_name: todo_prod-api
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - 3001:3000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    restart: always
+    container_name: todo_prod-db
+    ports:
+      - 5433:5432
+    volumes:
+      - ./backend/todo_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    container_name: todo_prod-frontend
+    restart: always
+    ports:
+      - 4201:4200
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - api
+
+volumes:
+  todo_data:

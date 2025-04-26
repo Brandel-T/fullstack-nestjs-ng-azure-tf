@@ -3,9 +3,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { Todo } from '../../../models/todo.model';
+import { Todo } from '@models/todo.model';
 import { RouterModule } from '@angular/router';
 import { TodoService } from '../services/todo.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent, DialogData } from 'app/shared/dialog/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'todo-item',
@@ -22,13 +24,31 @@ import { TodoService } from '../services/todo.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomComponentComponent {
-  todo = input.required<Todo>()
-
   todoService = inject(TodoService)
 
-  onDeleteTodo() {
+  todo = input.required<Todo>()
+
+  readonly dialog = inject(MatDialog);
+
+  openDeleteDialog() {
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete Todo',
+        message: 'Are you sure you want to delete this todo?',
+        confirmText: 'Yes',
+        cancelText: 'Cancel',
+        onAccept: () => {
+          this.onDeleteTodo();
+        },
+      } as DialogData,
+    });
+  }
+
+  private onDeleteTodo() {
     if (this.todo().id) {
-      this.todoService.deleteTodo(this.todo().id!)
+      this.todoService.deleteTodo(this.todo().id!).subscribe({
+        next: (_value) => {}
+      });
     }
   }
 }

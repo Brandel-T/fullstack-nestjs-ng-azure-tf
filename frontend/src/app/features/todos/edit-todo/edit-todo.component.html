@@ -6,7 +6,7 @@
 
     <h1>Edit ToDo</h1>
   </header>
-  <form [formGroup]="todoForm" class="px-3 pb-2">
+  <form [formGroup]="todoForm" (ngSubmit)="onSave()" class="px-3 pb-2">
     <div class="w-full mb-4">
       <mat-form-field class="w-full">
         <mat-label>Name</mat-label>
@@ -27,6 +27,6 @@
       </mat-form-field> -->
     </div>
     <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-flat-button type="submit" (click)="onSave()">Save</button>
+    <button mat-flat-button type="submit">Save</button>
   </form>
 </div>

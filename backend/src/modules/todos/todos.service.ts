@@ -38,10 +38,14 @@ export class TodosService {
     if (!todo) {
       throw new Error(`Todo with id ${id} not found`);
     }
-    const updatedTodo: Todo = {
-      ...todo,
-      ...updatedTodoDto,
-    };
+
+    const updatedTodo = {
+      description: updatedTodoDto.description!,
+      done: updatedTodoDto.done,
+      id: todo.id,
+      name: updatedTodoDto.name,
+    } as Todo;
+
     return this.todoRepo.save(updatedTodo);
   }
 }

@@ -6,7 +6,7 @@
     <button mat-icon-button [routerLink]="['', { outlets: { aside: ['todos', 'edit', todo().id] } }]">
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-icon-button (click)="onDeleteTodo()">
+    <button mat-icon-button (click)="openDeleteDialog()">
       <mat-icon class="text-red-500">delete</mat-icon>
     </button>
   </span>

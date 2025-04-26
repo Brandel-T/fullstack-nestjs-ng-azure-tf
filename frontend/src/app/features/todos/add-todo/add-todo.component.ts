@@ -36,15 +36,20 @@ export class AddTodoComponent {
 
   createTodo() {
     const newTodo: Todo = {
-      id: this.todoService.getLatestId() + 1,
       done: false,
       name: this.todoForm.value.name ?? '<no name>',
       description: this.todoForm.value.description ?? '',
       subTasks: this.todoForm.value.subTasks ?? [],
     }
 
-    this.todoService.addTodo(newTodo)
-    this.resetForm()
+    this.todoService.addTodo(newTodo).subscribe({
+      next: (_value) => {
+        this.resetForm()
+      },
+      complete: () => {
+        this.backToOverview()
+      }
+    })
   }
 
   backToOverview() {

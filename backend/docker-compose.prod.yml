@@ -6,7 +6,7 @@ services:
       context: .
       target: production
       dockerfile: Dockerfile
-    container_name: todo_api
+    container_name: todo_prod-api
     restart: always
     env_file:
       - .env

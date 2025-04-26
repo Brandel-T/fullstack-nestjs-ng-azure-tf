@@ -44,16 +44,18 @@ export class EditTodoComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe({
       next: (param) => {
-        this.todo = this.todoService.getTodoById(param['id'])
+        this.todoService.getTodoById(param['id']).subscribe((value) => {
+          this.todo = value
 
-        if (this.todo) {
-          this.todoForm.setValue({
-            description: this.todo.description ?? '',
-            name: this.todo.name,
-            subTasks: this.todo.subTasks ?? [],
-            done: this.todo.done
-          })
-        }
+          if (this.todo) {
+            this.todoForm.setValue({
+              description: this.todo.description ?? '',
+              name: this.todo.name,
+              subTasks: this.todo.subTasks ?? [],
+              done: this.todo.done
+            })
+          }
+        })
       },
       error: (err) => {
         alert('Unable to get Todo')
@@ -67,17 +69,22 @@ export class EditTodoComponent implements OnInit {
   }
 
   onSave() {
-    if (this.todo.id) {
-      this.todoService.updateTodo(this.todo.id, {
+    if (this.todo) {
+      this.todoService.updateTodo(this.todo.id!, {
+        id: this.todo.id,
         done: this.todoForm.value.done,
         name: this.todoForm.value.name,
         description: this.todoForm.value.description,
-        subTasks: this.todoForm.value.subTasks,
-      } as Todo)
+        subTasks: this.todoForm.value.subTasks ?? [],
+      } as Todo).subscribe({
+        next: (_value) => {
+          this.resetForm()
+        },
+        complete: () => {
+          this.backToOverview()
+        }
+      })
     }
-
-    this.backToOverview()
-    this.resetForm()
   }
 
   onCancel() {
