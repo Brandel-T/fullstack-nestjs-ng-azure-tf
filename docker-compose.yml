@@ -13,8 +13,8 @@ services:
       - /app/node_modules
     depends_on:
       - api
-    # networks:
-    #   - app
+    networks:
+      - app
 
   api:
     build:
@@ -32,8 +32,8 @@ services:
       - /app/node_modules
     depends_on:
       - postgres
-    # networks:
-    #   - app
+    networks:
+      - app
 
   postgres:
     image: postgres
@@ -45,11 +45,11 @@ services:
       - ./backend/todo_data:/var/lib/postgresql/data
     env_file:
       - ./backend/.env
-    # networks:
-    #   - app
+    networks:
+      - app
 
 volumes:
   todo_data:
 
-# networks:
-#   app:
+networks:
+  app:

@@ -1,18 +1,12 @@
-<h2 mat-dialog-title>Dialog with elements</h2>
-<mat-dialog-content>This dialog showcases the title, close, content and actions elements.</mat-dialog-content>
-<mat-dialog-actions>
-  <!-- <button mat-button (click)="onCancel()">{{
-    data?.cancelText || 'Cancel'
-  }}</button>
-  <button mat-button mat-dialog-close (click)="onAccept()">{{
-    data?.confirmText || 'Yes, please'
-  }}</button> -->
 @if (data) {
-  <button mat-button>{{ data.cancelText }}</button>
-  <button
-    mat-button
-    mat-dialog-close
-    (click)="onAccept()"
-  >{{ data.confirmText }}</button>
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content>{{ data.message }}</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button>{{ data.cancelText }}</button>
+    <button
+      mat-button
+      mat-dialog-close
+      (click)="onAccept()"
+    >{{ data.confirmText }}</button>
+  </mat-dialog-actions>
 }
-</mat-dialog-actions>

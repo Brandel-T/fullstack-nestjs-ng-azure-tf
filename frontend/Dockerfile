@@ -8,6 +8,8 @@ RUN npm install
 COPY . .
 
 EXPOSE 4200
+
+# "--host 0.0.0.0" to allow access from outside the container
 CMD ["npm", "run", "start", "--", "--host", "0.0.0.0"]
 
 
