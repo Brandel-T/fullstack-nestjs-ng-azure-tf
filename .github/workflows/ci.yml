@@ -1,6 +1,6 @@
 # ci workflow for fullstack todo app
 
-name: Fullstack Todo | Test CI
+name: Fullstack Todo | CI Pipeline
 
 on:
   push:
@@ -10,8 +10,44 @@ on:
 
 jobs:
   setup_environment:
-    name: Setup Environment
+    name: Setup Node.js & Cache Dependencies
     runs-on: ubuntu-latest
+    outputs:
+      cache-key: ${{ steps.set-cache-key.outputs.key }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Define cache key
+        id: set-cache-key
+        run: echo "key=${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}" >> $GITHUB_OUTPUT
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            **/node_modules
+          key: ${{ steps.set-cache-key.outputs.key }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install root dependencies
+        run: npm ci
+
+  ci_frontend:
+    name: Frontend Build & Test
+    needs: setup_environment
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,56 +56,37 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      
-      - name: Cache Node.js modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            **/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
 
-      - name: Install dependencies
+      - name: Install Frontend dependencies
         run: npm ci
 
-  ci_frontend:
-    name: Frontend Build & Test
-    needs: setup_environment
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Frontend dependencies
-        run: |
-          cd frontend
-          npm ci
-
       - name: Build Frontend (Angular)
-        run: |
-          cd frontend
-          npm run build -- --configuration production
+        run: npm run build -- --configuration production
 
       - name: Run Frontend tests
-        run: |
-          cd frontend
-          npm run test -- --watch=false --browsers=ChromeHeadless
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
 
   ci_backend:
     name: Backend Build & Test
     needs: setup_environment
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
       - name: Install Backend dependencies
-        run: |
-          cd backend
-          npm ci
+        run: npm ci
 
       - name: Build Backend (NestJS)
-        run: |
-          cd backend
-          npm run build
+        run: npm run build
 
       - name: Run Backend tests
-        run: |
-          cd backend
-          npm run test
+        run: npm run test
