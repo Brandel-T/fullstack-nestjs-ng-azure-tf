@@ -5,12 +5,12 @@ name: Fullstack Todo | Test CI
 on:
   push:
     branches: "*"
-  #   branches: [main]
-  # pull_request:
-  #   branches: [main]
+  pull_request:
+    branches: "*"
 
 jobs:
   setup_environment:
+    name: Setup Environment
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -27,28 +27,42 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-  ci_frontend_test:
+  ci_frontend:
+    name: Frontend Build & Test
     needs: setup_environment
     runs-on: ubuntu-latest
     steps:
-    - name: Build Angular project
-      run: |
-        cd /frontend
-        npm run build -- --configuration production
-    - name: Run tests on frontend
-      run: |
-        cd /backend
-        npm run 
+      - name: Install Frontend dependencies
+        run: |
+          cd frontend
+          npm ci
 
-  ci_backend_test:
+      - name: Build Frontend (Angular)
+        run: |
+          cd frontend
+          npm run build -- --configuration production
+
+      - name: Run Frontend tests
+        run: |
+          cd frontend
+          npm run test -- --watch=false --browsers=ChromeHeadless
+
+  ci_backend:
+    name: Backend Build & Test
     needs: setup_environment
     runs-on: ubuntu-latest
     steps:
-      - name: Build Nestjs project
+      - name: Install Backend dependencies
         run: |
-          cd /backend
+          cd backend
+          npm ci
+
+      - name: Build Backend (NestJS)
+        run: |
+          cd backend
           npm run build
-      - name: Run tests on backend
+
+      - name: Run Backend tests
         run: |
-          cd /backend
+          cd backend
           npm run test
