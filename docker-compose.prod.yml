@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   api:
     build:
@@ -9,24 +7,29 @@ services:
     container_name: todo_prod-api
     restart: always
     env_file:
-      - .env
+      - ./backend/.env
     ports:
       - 3001:3000
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
     depends_on:
       - postgres
+    networks:
+      - app
 
   postgres:
-    image: postgres:16
+    image: postgres
     restart: always
     container_name: todo_prod-db
     ports:
       - 5433:5432
     volumes:
       - ./backend/todo_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+    env_file:
+      - ./backend/.env
+    networks:
+      - app
 
   frontend:
     build:
@@ -42,6 +45,11 @@ services:
       - /app/node_modules
     depends_on:
       - api
+    networks:
+      - app
 
 volumes:
   todo_data:
+
+networks:
+  app:

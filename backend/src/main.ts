@@ -27,6 +27,11 @@ async function bootstrap() {
     allowedHeaders: 'Content-Type, Accept',
   });
   app.setGlobalPrefix('api');
+
+  console.log(
+    `API and documentation available at: http://localhost:${port}/api`,
+  );
+
   await app.listen(port ?? 3000);
 }
 bootstrap();
