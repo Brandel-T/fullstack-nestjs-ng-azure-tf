@@ -20,9 +20,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
+      
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
   ci_frontend_test:
     needs: setup_environment
