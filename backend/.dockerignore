@@ -1,0 +1,10 @@
+Dockerfile
+.dockerignore 
+node_modules 
+npm-debug.log 
+dist
+README.md
+.env.example
+
+# code documentation with compodoc
+/documentation

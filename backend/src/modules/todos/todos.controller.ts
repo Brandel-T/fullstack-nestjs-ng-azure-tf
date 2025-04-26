@@ -9,9 +9,10 @@ import {
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { TodosService } from './todos.service';
-import { ITodo } from './interfaces/todo.interface';
+// import { ITodo } from './interfaces/todo.interface';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { CreateTodoDto } from './dto/create-todo.dto';
+import { Todo } from './entities/todo.entity';
 
 @Controller('todos')
 @ApiTags('ToDos')
@@ -19,20 +20,20 @@ export class TodosController {
   constructor(private readonly todoService: TodosService) {}
 
   @Get()
-  findAll() {
+  findAll(): Promise<Todo[]> {
     return this.todoService.findAll();
   }
 
   @Get(':id')
   @ApiParam({ type: String, name: 'id', required: true })
-  getTodobyId(@Param('id') id: string): ITodo {
+  getTodobyId(@Param('id') id: string): Promise<Todo | null> {
     return this.todoService.findById(id);
   }
 
   @Delete(':id')
   @ApiParam({ type: String, name: 'id', required: true })
   deleteTodoById(@Param('id') id: string) {
-    this.todoService.deleteById(id);
+    return this.todoService.deleteById(id);
   }
 
   @Post()
