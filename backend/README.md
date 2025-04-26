@@ -9,8 +9,6 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-[![Fullstack Todo | Test CI](https://github.com/Brandel-T/fullstack-nestjs-ng-azure-tf/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Brandel-T/fullstack-nestjs-ng-azure-tf/actions/workflows/ci.yml)
-
 ## Description
 
 ![backend swagger api preview](/doc/be.png)
