@@ -39,7 +39,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install root dependencies
-        run: npm ci
+        run: npm install
 
   ci_frontend:
     name: Frontend Build & Test
