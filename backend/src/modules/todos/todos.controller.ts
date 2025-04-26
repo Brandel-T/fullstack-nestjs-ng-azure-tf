@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { ApiBody, ApiParam, ApiTags } from '@nestjs/swagger';
 import { TodosService } from './todos.service';
-// import { ITodo } from './interfaces/todo.interface';
 import { UpdateTodoDto } from './dto/update-todo.dto';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './entities/todo.entity';

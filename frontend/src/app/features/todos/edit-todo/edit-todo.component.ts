@@ -39,8 +39,6 @@ export class EditTodoComponent implements OnInit {
     done: new FormControl<boolean>(false, []),
   })
 
-  constructor() {}
-
   ngOnInit(): void {
     this.route.params.subscribe({
       next: (param) => {
