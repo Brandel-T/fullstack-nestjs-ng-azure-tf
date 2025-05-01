@@ -1,6 +1,6 @@
-# fullstack-nestjs-ng-azure-tf
-
 [![Fullstack Todo | Test CI](https://github.com/Brandel-T/fullstack-nestjs-ng-azure-tf/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Brandel-T/fullstack-nestjs-ng-azure-tf/actions/workflows/ci.yml)
+
+# fullstack-nestjs-ng-azure-tf
 
 A full-stack application from design to deployment on Azure, including IaC via Terraform.
 
