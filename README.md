@@ -56,6 +56,8 @@ choco install make
 
 #### Run the app
 
+Start up your Docker client, and:
+
 ```sh
 # run backend and fronend
 make up
