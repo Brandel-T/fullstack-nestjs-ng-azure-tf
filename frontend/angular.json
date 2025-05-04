@@ -36,6 +36,8 @@
               "primeflex/themes/primeone-light.css",
               "src/styles.scss"
             ],
+            "ssr": false,
+            "prerender": false,
             "scripts": []
           },
           "configurations": {
