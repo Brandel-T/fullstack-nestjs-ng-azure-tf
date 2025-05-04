@@ -49,7 +49,7 @@ jobs:
       - name: Zip artifact for deployment
         # run: zip -r ../release.zip ./dist/frontend/*
         run: |
-          zip -r ./release.zip ./frontend/dist/frontend/browser/*
+          zip -r ./release.zip ./frontend/dist/frontend/*
           ls -l ./frontend/dist/*
 
       - name: Upload artifact for deployment job
