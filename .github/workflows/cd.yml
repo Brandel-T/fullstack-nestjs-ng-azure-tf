@@ -1,12 +1,12 @@
 name: Fullstack Todo | Production CD
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - main
   release:
     types: [created, published]
   # workflow_dispatch:
