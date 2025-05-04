@@ -1,4 +1,4 @@
-name: Build and deploy Frontend to Azure Web App
+name: Build and deploy Frontend to Azure Web App | ng-todo-frontend
 
 on:
   push:
@@ -40,21 +40,19 @@ jobs:
       - name: npm install, build, and test
         working-directory: frontend
         run: |
-          echo "Current directory:"
-          pwd
           npm ci
           npm run build -- --configuration production
           npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Zip artifact for deployment
         run: |
-          zip -r ./release.zip ./frontend/dist/frontend/browser/*
+          zip -r ./web-release.zip ./frontend/dist/frontend/browser/*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: frontend-app
-          path: release.zip
+          path: web-release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -71,7 +69,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: |
-          unzip release.zip
+          unzip web-release.zip
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
