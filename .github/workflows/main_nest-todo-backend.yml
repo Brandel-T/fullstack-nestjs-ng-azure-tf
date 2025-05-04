@@ -48,7 +48,7 @@ jobs:
           npm run test
 
       - name: Zip artifact for deployment
-        run: zip -r ./api-release.zip ./backend/dist/*
+        run: zip -r ./api-release.zip ./backend/*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
