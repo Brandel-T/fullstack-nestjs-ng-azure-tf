@@ -48,13 +48,13 @@ jobs:
           npm run test
 
       - name: Zip artifact for deployment
-        run: zip -r ./api-release.zip ./backend/*
+        run: zip -r ./api-release.zip ./backend/dist/*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: backend-app
-          path: api-release.zip
+          path: ./api-release.zip
 
   deploy:
     runs-on: ubuntu-latest
