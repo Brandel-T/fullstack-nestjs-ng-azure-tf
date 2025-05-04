@@ -47,10 +47,8 @@ jobs:
           npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Zip artifact for deployment
-        # run: zip -r ../release.zip ./dist/frontend/*
         run: |
-          zip -r ./release.zip ./frontend/dist/frontend/*
-          ls -l ./frontend/dist/*
+          zip -r ./release.zip ./frontend/dist/frontend/browser/*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
