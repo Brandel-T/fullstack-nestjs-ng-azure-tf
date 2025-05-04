@@ -2,9 +2,9 @@ Dockerfile
 .dockerignore 
 node_modules 
 npm-debug.log 
-dist
-README.md
+*.md
 .env.example
+.git
 
 # code documentation with compodoc
 /documentation

@@ -18,6 +18,4 @@ import { CommonModule } from '@angular/common';
     CommonModule,
   ],
 })
-export class AppComponent {
-  title = 'frontend';
-}
+export class AppComponent {}

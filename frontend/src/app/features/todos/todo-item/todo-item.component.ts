@@ -25,10 +25,19 @@ import { ConfirmDialogComponent, DialogData } from 'app/shared/dialog/confirm-di
 })
 export class CustomComponentComponent {
   todoService = inject(TodoService)
+  readonly dialog = inject(MatDialog);
 
   todo = input.required<Todo>()
 
-  readonly dialog = inject(MatDialog);
+  onMarkDone() {
+    if (this.todo().id) {
+      this.todoService.updateTodo(this.todo().id!, {...this.todo()}).subscribe({
+        next: (value) => {
+          console.log(value);
+        }
+      });
+    }
+  }
 
   openDeleteDialog() {
     this.dialog.open(ConfirmDialogComponent, {

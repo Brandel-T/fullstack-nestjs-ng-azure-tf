@@ -19,9 +19,9 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --omit=dev
+RUN npm ci 
 COPY . .
-RUN npm run build -- --configuration production
+RUN npm run build --prod
 
 # Production server
 FROM nginx:alpine AS production

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'page-not-found',
@@ -9,9 +8,4 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './page-not-found.component.html',
   styleUrls: ['./page-not-found.component.scss'],
 })
-export class PageNotFoundComponent implements OnInit {
-  constructor() {}
-  
-  ngOnInit(): void {
-  }
-}
+export class PageNotFoundComponent {}
