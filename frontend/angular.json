@@ -15,11 +15,11 @@
       "prefix": "",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/frontend",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
@@ -36,8 +36,6 @@
               "primeflex/themes/primeone-light.css",
               "src/styles.scss"
             ],
-            "ssr": false,
-            "prerender": false,
             "scripts": []
           },
           "configurations": {
@@ -54,6 +52,8 @@
                   "maximumError": "8kB"
                 }
               ],
+              "buildOptimizer": true,
+              "aot": true,
               "outputHashing": "all",
               "fileReplacements": [
                 {
