@@ -52,6 +52,8 @@ jobs:
           echo "ZIPPING: Current directory:"
           pwd
           zip -r ./release.zip ./frontend/*
+          echo "Content of ROOT after zipping:"
+          ls -la
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -73,7 +75,10 @@ jobs:
           name: frontend-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: |
+          echo "Content of ROOT before unzipping:"
+          ls -la
+          unzip release.zip
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
