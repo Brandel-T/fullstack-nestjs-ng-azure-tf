@@ -47,8 +47,13 @@ jobs:
           npm run build
           npm run test
 
-      - name: Zip artifact for deployment
-        run: zip -r ./api-release.zip ./backend/dist/*
+      - name: Prepare and Zip artifact for deployment
+        run: |
+          mkdir deploy
+          cp backend/package*.json deploy/
+          cp -r backend/dist deploy/
+          cd deploy
+          zip -r ../api-release.zip .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
