@@ -40,6 +40,8 @@ jobs:
       - name: npm install, build, and test
         working-directory: frontend
         run: |
+          echo "Current directory:"
+          pwd
           npm ci
           npm run build -- --configuration production
           npm run test -- --watch=false --browsers=ChromeHeadless
@@ -47,7 +49,9 @@ jobs:
       - name: Zip artifact for deployment
         # run: zip -r ../release.zip ./dist/frontend/*
         run: |
-          zip -r ./release.zip ./frontend/dist/frontend/*
+          echo "ZIPPING: Current directory:"
+          pwd
+          zip -r ./release.zip ./frontend/*
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -77,5 +81,5 @@ jobs:
         with:
           app-name: "ng-todo-frontend"
           slot-name: "Production"
-          package: ./frontend
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FB609C6D90D6452BA2D754D7D095CE6B }}
