@@ -39,7 +39,7 @@ jobs:
       - name: npm install, build, and test
         working-directory: frontend
         run: |
-          npm ci --omit=dev
+          npm ci
           npm install -g @angular/cli
           npm run build  -- --configuration production --if-present
           npm run test -- --watch=false --browsers=ChromeHeadless --if-present
