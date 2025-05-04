@@ -76,6 +76,10 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip api-release.zip
+
+      - name: Install nodejs dependencies
+        run: |
+          npm ci          
       
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
