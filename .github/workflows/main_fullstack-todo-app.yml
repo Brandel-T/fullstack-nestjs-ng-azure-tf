@@ -41,8 +41,8 @@ jobs:
         run: |
           npm ci
           npm install -g @angular/cli
-          npm run build  -- --configuration production --if-present
-          npm run test -- --watch=false --browsers=ChromeHeadless --if-present
+          npm run build  -- --configuration production
+          npm run test -- --watch=false --browsers=ChromeHeadless
 
       - name: Zip artifact for deployment
         working-directory: frontend
