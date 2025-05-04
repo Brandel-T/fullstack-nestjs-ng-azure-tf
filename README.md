@@ -6,8 +6,8 @@ A full-stack application from design to deployment on Azure, including IaC via T
 
 This a fullstack project repos with:
 
-- [`backend`](/backend/): containing the backend project, and
-- [`frontend`](/frontend/): containing the frontend
+- [`/backend`](/backend/): containing the backend project, and
+- [`/frontend`](/frontend/): containing the frontend
 
 ## Tech Stack
 
@@ -19,9 +19,9 @@ This hands-on app supports:
 - [ ] **GitHub Actions**✅: for ci/cd
 - [ ] **Terraform**: for IaC and infrastructure setup
 - [ ] **Azure**: to host the infrastructure/app
+- [ ] **CMake**
 
 ## Get Started
-
 
 ### Using Docker
 

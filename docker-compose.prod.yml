@@ -5,6 +5,7 @@ services:
       target: production
       dockerfile: Dockerfile
     container_name: todo_prod-api
+    image: temgoua20020/fullstack-todo-backend:latest
     restart: always
     env_file:
       - ./backend/.env
@@ -37,6 +38,7 @@ services:
       dockerfile: Dockerfile
       target: production
     container_name: todo_prod-frontend
+    image: temgoua20020/fullstack-todo-web:latest
     restart: always
     ports:
       - 4201:4200
